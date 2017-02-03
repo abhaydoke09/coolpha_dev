@@ -26,14 +26,13 @@ f.close()
 
 f = open('test_images_prediction.txt','wb')
 
-count = 0 
+count = 0  
 for image_name in images:
-	image_name = image_name.split(' ')[0]
+    image_name = image_name.split(' ')[0]
     label = get_image_label(image_name)
     f.write(image_name+" "+str(label)+'\n')
     count+=1
-    if count>10:
-        break
+    print count
 
 f.close()
 

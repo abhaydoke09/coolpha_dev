@@ -1,0 +1,11 @@
+hpl-telugu-iso-char-offline-test/usr_126/032t02.png 32
+hpl-telugu-iso-char-offline-test/usr_126/002t01.png 2
+hpl-telugu-iso-char-offline-test/usr_126/016t01.png 16
+hpl-telugu-iso-char-offline-test/usr_126/028t01.png 28
+hpl-telugu-iso-char-offline-test/usr_126/020t01.png 20
+hpl-telugu-iso-char-offline-test/usr_126/031t01.png 31
+hpl-telugu-iso-char-offline-test/usr_126/046t02.png 46
+hpl-telugu-iso-char-offline-test/usr_126/044t01.png 44
+hpl-telugu-iso-char-offline-test/usr_126/013t02.png 13
+hpl-telugu-iso-char-offline-test/usr_126/025t02.png 25
+hpl-telugu-iso-char-offline-test/usr_126/048t02.png 48
