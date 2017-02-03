@@ -9,7 +9,7 @@ net = caffe.Classifier('../../models/3-layered-caffenet/train_coolphabet_deploy.
 def get_image_label(img_name):
     if img_name:
         #imgName = request.args['imgName']
-        input_image = caffe.io.load_image('/home/ubuntu/coolpha_data/hpl-telugu-iso-char-offline-test/'+img_name)
+        input_image = caffe.io.load_image('/home/ubuntu/coolpha_data/'+img_name)
         #print input_image
         prediction = net.predict([input_image])
         label = prediction[0].argmax()
@@ -22,9 +22,21 @@ def get_image_label(img_name):
 test_images = 'hpl-telugu-test-52.txt'
 f = open(test_images,'r')
 images = f.readlines()
+f.close()
 
+f = open('test_images_prediction.txt','wb')
+
+count = 0 
 for image_name in images:
-	print image_name.split(' ')
+	image_name = image_name.split(' ')[0]
+    label = get_image_label(image_name)
+    f.write(image_name+" "+str(label)+'\n')
+    count+=1
+    if count>10:
+        break
+
+f.close()
+
 
 
 
