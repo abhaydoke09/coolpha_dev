@@ -1,0 +1,160 @@
+name: "CaffeNet"
+layer {
+  name: "data"
+  type: "Input"
+  top: "data"
+  input_param { shape: { dim: 1 dim: 3 dim: 227 dim: 227 } }
+}
+layer {
+  name: "conv1_c"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1_c"
+  
+  convolution_param {
+    num_output: 96
+    kernel_size: 11
+    stride: 4
+  }
+}
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "conv1_c"
+  top: "conv1_c"
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv1_c"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "norm1"
+  type: "LRN"
+  bottom: "pool1"
+  top: "norm1"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+layer {
+  name: "conv2_c"
+  type: "Convolution"
+  bottom: "norm1"
+  top: "conv2_c"
+  
+  convolution_param {
+    num_output: 256
+    pad: 2
+    kernel_size: 5
+    group: 2
+    
+  }
+}
+layer {
+  name: "relu2"
+  type: "ReLU"
+  bottom: "conv2_c"
+  top: "conv2_c"
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv2_c"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "norm2"
+  type: "LRN"
+  bottom: "pool2"
+  top: "norm2"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+layer {
+  name: "conv3_c"
+  type: "Convolution"
+  bottom: "norm2"
+  top: "conv3_c"
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu3"
+  type: "ReLU"
+  bottom: "conv3_c"
+  top: "conv3_c"
+}
+
+layer {
+  name: "pool5"
+  type: "Pooling"
+  bottom: "conv3_c"
+  top: "pool5"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+
+layer {
+  name: "fc7-spatial"
+  type: "InnerProduct"
+  bottom: "pool5"
+  top: "fc7-spatial"
+  inner_product_param {
+    num_output: 2048
+  }
+}
+layer {
+  name: "relu7"
+  type: "ReLU"
+  bottom: "fc7-spatial"
+  top: "fc7-spatial"
+}
+layer {
+  name: "drop7"
+  type: "Dropout"
+  bottom: "fc7-spatial"
+  top: "fc7-spatial"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+
+layer {
+  name: "fc8-spatial"
+  type: "InnerProduct"
+  bottom: "fc7-spatial"
+  top: "fc8-spatial"
+  
+  inner_product_param {
+    num_output: 52
+  }
+}
+layer {
+  name: "prob"
+  type: "Softmax"
+  bottom: "fc8-spatial"
+  top: "prob"
+}
