@@ -1,3 +1,5 @@
+import sys
+import numpy as np
 caffe_root = '/home/ubuntu/Caffe/caffe-master/'
 sys.path.insert(0,caffe_root + 'python')
 import caffe
@@ -19,7 +21,7 @@ def get_image_label(img_name):
 
 test_images = 'hpl-telugu-test-52.txt'
 f = open(test_images,'r')
-images = test_images.readlines()
+images = f.readlines()
 
 for image_name in images:
 	print image_name.split(' ')
